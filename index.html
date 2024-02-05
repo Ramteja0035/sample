@@ -1,4 +1,5 @@
 <!-- templates/index.html -->
+<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,22 @@
 </head>
 <body>
     <h1>Python Output:</h1>
-    <p>{{ output }}</p>
+    <p id="output-placeholder">Loading...</p>
+
+    <script>
+        // Use JavaScript to fetch data from the server
+        async function fetchData() {
+            try {
+                const response = await fetch('/get_output');
+                const data = await response.json();
+                document.getElementById('output-placeholder').innerText = data.output;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Call the function on page load
+        fetchData();
+    </script>
 </body>
 </html>
